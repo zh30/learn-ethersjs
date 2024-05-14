@@ -1,4 +1,7 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
+import { ethers } from "ethers";
+import { useCallback, useEffect, useRef } from "react";
+import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,25 +14,17 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  // const provider = ethers.getDefaultProvider("https://ethereum-rpc.zhanghe.dev");
+  const handleConnect = useCallback(async () => {
+    const provider = new ethers.JsonRpcProvider("https://ethereum-rpc.zhanghe.dev");
+    const balance = await provider.getBalance('zhanghe.eth');
+    console.log(balance);
+  }, [])
+
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix (with Vite and Cloudflare)</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-remix-site/"
-            rel="noreferrer"
-          >
-            Cloudflare Pages Docs - Remix guide
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div className="p-4">
+      <h1 className="text-3xl">Welcome to ethers</h1>
+      <Button variant="outline" onClick={handleConnect}>Hello ethers</Button>
     </div>
   );
 }
