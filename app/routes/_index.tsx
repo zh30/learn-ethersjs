@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 import { ethers } from "ethers";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { Button } from "~/components/ui/button";
 
 export const meta: MetaFunction = () => {
@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   // const provider = ethers.getDefaultProvider("https://ethereum-rpc.zhanghe.dev");
   const handleConnect = useCallback(async () => {
-    const provider = new ethers.JsonRpcProvider("https://ethereum-rpc.zhanghe.dev");
+    const provider = new ethers.JsonRpcProvider("https://ethereum-rpc.zhanghe.dev/v1/mainnet");
     const balance = await provider.getBalance('zhanghe.eth');
     console.log(balance);
   }, [])
