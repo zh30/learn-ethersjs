@@ -16,9 +16,13 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   // const provider = ethers.getDefaultProvider("https://ethereum-rpc.zhanghe.dev");
   const handleConnect = useCallback(async () => {
-    const provider = new ethers.JsonRpcProvider("https://ethereum-rpc.zhanghe.dev/v1/mainnet");
+    const provider = new ethers.JsonRpcProvider("https://ethereum-rpc.zhanghe.dev/v1/sepolia");
     const balance = await provider.getBalance('zhanghe.eth');
-    console.log(balance);
+    const txCount = await provider.getTransactionCount('zhanghe.eth');
+    console.log(txCount)
+    const gasFee = await provider.getFeeData();
+    console.log(gasFee)
+    console.log(ethers.formatEther(balance));
   }, [])
 
   return (
